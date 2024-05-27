@@ -1,0 +1,15 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<ul>
+    {% for todo in todos %}
+        <li>
+            <a href="{% url 'todo_update' todo.pk %}">{{ todo.title }}</a> - {{ todo.description }} - {{ todo.completed }}
+            <form action="{% url 'todo_delete' todo.pk %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
